@@ -24,7 +24,15 @@ import { MailerModule } from '@nestjs-modules/mailer';
       synchronize: true,
     }),
     MailerModule.forRoot({
-      transport: `smtps://${encodeURIComponent(String(process.env.MAIL_USER))}:${encodeURIComponent(String(process.env.MAIL_PASS))}@${process.env.MAIL_HOST}`,
+      transport: {
+        host: process.env.MAIL_HOST,
+        port: parseInt(process.env.MAIL_PORT || '587'),
+        secure: process.env.MAIL_SECURE === 'true',
+        auth: {
+          user: process.env.MAIL_USER,
+          pass: process.env.MAIL_PASS,
+        },
+      },
     }),
     UsersModule,
     AuthModule,
