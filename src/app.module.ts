@@ -24,7 +24,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
       synchronize: true,
     }),
     MailerModule.forRoot({
-      transport: `smtps://${process.env.MAIL_USER}:${process.env.MAIL_PASS}@${process.env.MAIL_HOST}`,
+      transport: `smtps://${encodeURIComponent(String(process.env.MAIL_USER))}:${encodeURIComponent(String(process.env.MAIL_PASS))}@${process.env.MAIL_HOST}`,
     }),
     UsersModule,
     AuthModule,
