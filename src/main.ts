@@ -17,8 +17,12 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    credentials: true,
     origin: ['http://localhost:3001', 'https://penny-juice-web.vercel.app'],
+    credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Authorization',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   });
 
   app.setGlobalPrefix('api/v1');
